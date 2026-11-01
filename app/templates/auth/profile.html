@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% block title %}Профиль — {{ user.username }}{% endblock %}
+
+{% block content %}
+<!-- Блок с паттерном. Он занимает всю ширину контейнера из base.html -->
+<div class="profile-background">
+    
+    <!-- Внутренний контейнер центрирует карточку, но фон остается на всю ширину -->
+    <div class="container py-4">
+        <div class="row justify-content-center">
+            <div class="col-md-8 col-lg-6">
+                
+                <h1 class="mb-4">Профиль</h1>
+
+                <!-- Карточка с данными (bg-white чтобы перекрыть паттерн) -->
+                <div class="custom-card bg-white p-4">
+                    <dl class="row mb-0">
+                        <dt class="col-sm-4">Логин</dt>
+                        <dd class="col-sm-8">{{ user.username }}</dd>
+
+                        <dt class="col-sm-4">Фамилия</dt>
+                        <dd class="col-sm-8">{{ user.last_name or "Не указана" }}</dd>
+
+                        <dt class="col-sm-4">Имя</dt>
+                        <dd class="col-sm-8">{{ user.first_name or "Не указано" }}</dd>
+
+                        <dt class="col-sm-4">Класс</dt>
+                        <dd class="col-sm-8">{{ user.class_name or "не указан" }}</dd>
+
+                        <dt class="col-sm-4">Роль</dt>
+                        <dd class="col-sm-8">
+                            {% if user.role.value == "student" %}
+                                <span class="badge bg-secondary">Ученик</span>
+                            {% elif user.role.value == "member" %}
+                                <span class="badge bg-primary">Член парламента</span>
+                            {% elif user.role.value == "chair" %}
+                                <span class="badge bg-warning text-dark">Председатель</span>
+                            {% elif user.role.value == "admin" %}
+                                <span class="badge bg-danger">Администратор</span>
+                            {% endif %}
+                        </dd>
+                    </dl>
+                </div>
+
+                <a href="/" class="btn btn-outline-secondary mt-3 bg-white">← На главную</a>
+
+                <!-- Блок админки -->
+                {% if user.role.value == "admin" %}
+                <div class="row justify-content-center mt-4">
+                    <div class="col-12">
+                        <div class="custom-card bg-white p-4" style="border-left: 4px solid #dc3545;">
+                            <div class="d-flex justify-content-between align-items-center flex-wrap">
+                                <div>
+                                    <h5 class="fw-bold text-danger mb-1" style="font-size: 1.1rem;">Панель управления</h5>
+                                    <p class="text-muted small mb-0">Управление контентом и пользователями</p>
+                                </div>
+                                <a href="/admin" class="btn btn-danger btn-sm mt-2 mt-sm-0">
+                                    Перейти →
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+
+            </div>
+        </div>
+    </div>
+    
+</div>
+{% endblock %}

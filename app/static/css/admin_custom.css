@@ -1,0 +1,78 @@
+/* --- ЦВЕТА САЙТА --- */
+:root {
+    --primary-navy: #1b263b;
+    --accent-gold: #e0a96d;
+    --bg-light: #f4f6f9;
+}
+
+/* --- ОБЩИЙ ФОН --- */
+body {
+    background-color: var(--bg-light) !important;
+    font-family: 'Inter', -apple-system, sans-serif !important;
+}
+
+/* --- ЛЕВОЕ МЕНЮ (САЙДБАР) --- */
+.sidebar {
+    background-color: var(--primary-navy) !important;
+}
+
+.sidebar .nav-link {
+    color: rgba(255, 255, 255, 0.7) !important;
+    font-weight: 500;
+    border-radius: 8px;
+    margin: 4px 12px;
+    transition: all 0.2s ease;
+}
+
+.sidebar .nav-link:hover, 
+.sidebar .nav-link.active {
+    background-color: rgba(224, 169, 109, 0.15) !important;
+    color: var(--accent-gold) !important;
+}
+
+.sidebar .navbar-brand {
+    color: white !important;
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+
+/* --- КНОПКИ --- */
+.btn-primary, 
+.btn-success, 
+.btn-info {
+    background-color: var(--accent-gold) !important;
+    border-color: var(--accent-gold) !important;
+    color: var(--primary-navy) !important;
+    font-weight: 600 !important;
+    border-radius: 8px !important;
+}
+
+.btn-primary:hover, 
+.btn-success:hover, 
+.btn-info:hover {
+    background-color: #d4985c !important;
+    border-color: #d4985c !important;
+}
+
+/* --- КАРТОЧКИ И ТАБЛИЦЫ --- */
+.card {
+    border-radius: 12px !important;
+    border: none !important;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05) !important;
+}
+
+.table th {
+    font-weight: 600;
+    color: var(--primary-navy);
+    border-bottom-width: 1px !important;
+}
+
+/* --- ЗАГОЛОВКИ --- */
+h1, h2, h3, h4, h5 {
+    color: var(--primary-navy) !important;
+    font-weight: 700 !important;
+}
+
+/* --- СКРЫВАЕМ ЛИШНЕЕ (опционально) --- */
+/* Если захочешь убрать стандартный логотип sqladmin */
+/* .navbar-brand img { display: none; } */

@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title %}Школьный парламент Зыковской СОШ{% endblock %}
+
+{% block content %}
+<!-- Центральный баннер -->
+<div class="d-flex flex-column justify-content-center align-items-center text-center" style="min-height: 60vh;">
+        <div class="col-lg-5 text-center mt-5 mt-lg-0">
+        <!-- Красивая круглая рамка для фото -->
+        <div class="custom-card p-2 mx-auto d-inline-block" style="border-radius: 50%; box-shadow: 0 15px 35px rgba(0,0,0,0.15);">
+            <img src="/static/img/logo.png" 
+                 alt="Школьный парламент" 
+                 class="img-fluid rounded-circle" 
+                 style="object-fit: cover; height: 200px; width: 200px; border: 6px solid white;">
+        </div>
+    </div>
+    <!-- Главный заголовок -->
+    <h1 class="display-3 fw-bold mb-2" style="color: var(--primary-navy);">
+        Зыковская СОШ
+    </h1>
+    <h3 class="h4 text-muted mb-4">
+        им. Героя РФ К.А. Веселова
+    </h3>
+
+    <hr class="w-25 mb-4" style="border-color: var(--accent-gold); border-width: 2px; opacity: 1;">
+
+    <!-- Подзаголовок -->
+    <h2 class="h4 mb-4 fw-normal">Школьный парламент</h2>
+    <p class="lead text-muted mx-auto mb-5" style="max-width: 600px;">
+        Мы — орган ученического самоуправления. Организуем мероприятия, представляем интересы учеников и делаем школьную жизнь ярче.
+    </p>
+
+    <!-- Кнопки навигации (как в ТЗ) -->
+    <div class="d-flex flex-wrap gap-3 justify-content-center">
+        <a href="/about" class="btn btn-accent btn-lg px-4">О парламенте</a>
+        <a href="/news" class="btn btn-outline-custom btn-lg px-4">Новости</a>
+        <a href="/members" class="btn btn-outline-custom btn-lg px-4">Состав</a>
+        <a href="/feedback" class="btn btn-outline-custom btn-lg px-4">Ящик идей</a>
+    </div>
+</div>
+{% endblock %}

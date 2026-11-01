@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block title %}Новости{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-9">
+        
+        <div class="mb-5">
+            <h1 class="fw-bold" style="color: var(--primary-navy);">Новости и объявления</h1>
+            <p class="text-muted">Следите за жизнью школьного парламента</p>
+        </div>
+
+        <div class="d-flex flex-column gap-4">
+            {% for data in news_data %}
+            <div class="custom-card p-4 p-md-5">
+                
+                <!-- Категория и дата -->
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <span class="badge" style="background-color: var(--accent-gold); color: var(--primary-navy); font-size: 0.9rem;">
+                        {{ data.item.category }}
+                    </span>
+                    <small class="text-muted">{{ data.item.created_at.strftime("%d.%m.%Y") }}</small>
+                </div>
+                
+                <!-- Заголовок -->
+                <h2 class="fw-bold mb-4" style="color: var(--primary-navy); font-size: 1.8rem;">
+                    {{ data.item.title }}
+                </h2>
+
+                                <!-- Полный текст новости (Markdown) -->
+                <div class="page-content fs-5 mb-0" style="word-break: break-all; overflow-wrap: anywhere;">
+                    {{ data.content_html | safe }}
+                </div>
+
+            </div>
+            {% else %}
+            <div class="text-center py-5">
+                <h4 class="text-muted">Пока новостей нет</h4>
+            </div>
+            {% endfor %}
+        </div>
+        
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Школьный парламент{% endblock %}</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/static/img/logo.png">
+    
+        <!-- Мета-теги для соцсетей (Open Graph) -->
+    <meta property="og:title" content="{% block og_title %}Школьный парламент Зыковской СОШ{% endblock %}">
+    <meta property="og:description" content="{% block og_description %}Официальный сайт школьного парламента{% endblock %}">
+    <meta property="og:image" content="/static/img/logo.png">
+    <meta property="og:type" content="website">
+    
+    <!-- Обычные мета-теги для поисковиков -->
+    <meta name="description" content="{% block meta_description %}Официальный сайт школьного парламента Зыковской СОШ.{% endblock %}">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Наш кастомный CSS -->
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <!-- Навигация -->
+    <nav class="navbar navbar-expand-lg custom-navbar">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="/">
+                <img src="/static/img/logo.png" 
+                     alt="Логотип" 
+                     class="rounded-circle bg-white" 
+                     style="height: 40px; width: 40px; object-fit: cover; margin-right: 10px; border: 1px solid rgba(255,255,255,0.2);">
+                <span class="d-none d-sm-inline">Парламент Зыковской СОШ</span>
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <div class="navbar-nav ms-auto align-items-center">
+                    <a class="nav-link px-3" href="/">Главная</a>
+                    <a class="nav-link px-3" href="/about">О парламенте</a>
+                    <a class="nav-link px-3" href="/news">Новости</a>
+                    <a class="nav-link px-3" href="/members">Состав</a>
+                    <a class="nav-link px-3" href="/feedback">Ящик идей</a>
+
+                    {% if current_user %}
+                        <a class="nav-link px-3 fw-bold" href="/profile">
+                            {% if current_user.last_name %}{{ current_user.last_name }} {% endif %}{{ current_user.first_name or current_user.username }}
+                        </a>
+                        <a class="btn btn-sm btn-outline-light ms-2" href="/auth/logout">Выйти</a>
+                    {% else %}
+                        <a class="nav-link px-3" href="/auth/login">Войти</a>
+                        <a class="btn btn-sm btn-accent ms-2" href="/auth/register">Регистрация</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Основной контент -->
+    <main class="container py-5">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Футер -->
+    <footer class="text-center text-muted py-4" style="background-color: var(--primary-navy); color: rgba(255,255,255,0.6) !important; margin-top: auto;">
+        <div class="container">
+            <p class="mb-1">&copy; 2026 Зыковская СОШ им. Героя РФ К.А. Веселова</p>
+            <small>Разработано в рамках индивидуального проекта</small>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Скрипт кнопки "Наверх" -->
+        <script>
+        const topBtn = document.createElement("button");
+        topBtn.innerHTML = "↑";
+        
+        // Применяем стили с !important через setProperty
+        topBtn.style.cssText = `
+            display: none;
+            position: fixed !important;
+            bottom: 30px !important;
+            right: 30px !important;
+            z-index: 2147483647 !important;
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            background-color: #e0a96d;
+            color: #1b263b;
+            font-size: 26px;
+            font-weight: bold;
+            border: none;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            cursor: pointer;
+            padding: 0;
+            line-height: 55px;
+            text-align: center;
+        `;
+
+        document.body.appendChild(topBtn);
+
+        window.onscroll = function() {
+            if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+                topBtn.style.setProperty('display', 'block', 'important');
+            } else {
+                topBtn.style.setProperty('display', 'none', 'important');
+            }
+        };
+
+        topBtn.addEventListener("click", function() {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block title %}Написать нам{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        
+        <a href="/feedback" class="text-decoration-none mb-4 d-inline-block" style="color: var(--primary-navy);">
+            ← Вернуться к идеям
+        </a>
+
+        <div class="custom-card bg-white p-4 p-md-5">
+            <h1 class="fw-bold mb-3" style="color: var(--primary-navy);">Обратная связь</h1>
+            <p class="text-muted mb-4">Есть идея, вопрос или предложение? Напишите нам, и мы обязательно ответим.</p>
+
+            {% if success %}
+                <div class="alert alert-success border-0 shadow-sm mb-4">
+                    <i class="fa-solid fa-check-circle me-2"></i> {{ success }}
+                </div>
+            {% endif %}
+
+            <form method="post" action="/feedback/form">
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="name" class="form-label">Ваше имя</label>
+                        <input type="text" class="form-control" id="name" name="name" placeholder="Иван Иванов">
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="class_name" class="form-label">Класс</label>
+                        <input type="text" class="form-control" id="class_name" name="class_name" placeholder="10А">
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="message" class="form-label">Сообщение <span class="text-danger">*</span></label>
+                    <textarea class="form-control" id="message" name="message" rows="5" required placeholder="Напишите ваше предложение или вопрос..."></textarea>
+                </div>
+
+                <div class="form-check mb-4">
+                    <input class="form-check-input" type="checkbox" id="is_anonymous" name="is_anonymous" value="true">
+                    <label class="form-check-label" for="is_anonymous">
+                        Отправить анонимно (мы не увидим ваше имя и класс)
+                    </label>
+                </div>
+
+                <button type="submit" class="btn btn-accent w-100 py-2 fs-5">Отправить сообщение</button>
+            </form>
+        </div>
+        
+    </div>
+</div>
+{% endblock %}

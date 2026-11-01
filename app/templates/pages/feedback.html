@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block title %}Идеи и предложения{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        
+        <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap">
+            <div>
+                <h1 class="fw-bold mb-1" style="color: var(--primary-navy);">Ящик идей</h1>
+                <p class="text-muted mb-0">Голосуйте за лучшие предложения или предлагайте свои!</p>
+            </div>
+            <!-- Кнопка перехода на форму -->
+            <a href="/feedback/form" class="btn btn-accent mt-3 mt-sm-0">
+                ✍️ Написать нам
+            </a>
+        </div>
+
+        <!-- Список идей -->
+        <div class="d-flex flex-column gap-3">
+            {% for idea in ideas %}
+            <div class="custom-card p-4 d-flex align-items-center justify-content-between flex-row">
+                <div class="me-3">
+                    <h4 class="fw-bold mb-1" style="color: var(--primary-navy);">{{ idea.title }}</h4>
+                    {% if idea.description %}
+                        <p class="text-muted mb-0 small">{{ idea.description }}</p>
+                    {% endif %}
+                </div>
+                
+                <!-- Кнопка голосования -->
+                <div class="text-center flex-shrink-0">
+                    {% if idea.id in voted_idea_ids %}
+                        <!-- Уже проголосовал -->
+                        <button class="btn btn-success rounded-pill px-4" disabled>
+                            {{ idea.votes_count }} 👍
+                        </button>
+                    {% else %}
+                        <!-- Еще не голосовал -->
+                        <form method="post" action="/feedback/vote/{{ idea.id }}">
+                            <button type="submit" class="btn btn-outline-custom rounded-pill px-4">
+                                {{ idea.votes_count }} 👍
+                            </button>
+                        </form>
+                    {% endif %}
+                </div>
+            </div>
+            {% else %}
+            <div class="text-center py-5">
+                <h4 class="text-muted">Пока нет идей</h4>
+                <p class="text-muted">Станьте первым, кто предложит что-то крутое!</p>
+            </div>
+            {% endfor %}
+        </div>
+
+        {% if not user %}
+        <div class="alert alert-info mt-4 text-center">
+            Чтобы голосовать за идеи, <a href="/auth/login">войдите в аккаунт</a>.
+        </div>
+        {% endif %}
+
+    </div>
+</div>
+{% endblock %}

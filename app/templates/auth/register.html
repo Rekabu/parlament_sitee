@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}Регистрация{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-5">
+        <h1 class="mb-4">Регистрация</h1>
+
+        {% if error %}
+            <div class="alert alert-danger">{{ error }}</div>
+        {% endif %}
+
+        <form method="post" action="/auth/register">
+            <div class="mb-3">
+                <label for="username" class="form-label">Логин</label>
+                <input type="text" class="form-control" id="username" name="username" required>
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Пароль</label>
+                <input type="password" class="form-control" id="password" name="password" required>
+            </div>
+            <div class="mb-3">
+                <label for="class_name" class="form-label">Класс (опционально)</label>
+                <input type="text" class="form-control" id="class_name" name="class_name" placeholder="Например, 10А">
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Зарегистрироваться</button>
+        </form>
+
+        <p class="mt-3 text-center">
+            Уже есть аккаунт? <a href="/auth/login">Войти</a>
+        </p>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block og_title %}{{ news.title }}{% endblock %}
+{% block og_description %}{{ news.summary }}{% endblock %}
+{% block meta_description %}{{ news.summary }}{% endblock %}
+
+{% block title %}{{ news.title }}{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <!-- Кнопка назад -->
+        <a href="/news" class="text-decoration-none mb-4 d-inline-block" style="color: var(--primary-navy);">
+            ← Все новости
+        </a>
+
+        <div class="article-card">
+            <!-- Категория и дата -->
+            <div class="d-flex justify-content-between align-items-center mb-4 pb-3 border-bottom">
+                <span class="badge fs-6" style="background-color: var(--accent-gold); color: var(--primary-navy);">
+                    {{ news.category }}
+                </span>
+                <small class="text-muted">{{ news.created_at.strftime("%d.%m.%Y %H:%M") }}</small>
+            </div>
+
+            <!-- Заголовок -->
+            <h1 class="fw-bold mb-4" style="color: var(--primary-navy);">{{ news.title }}</h1>
+
+            <!-- Полный текст (Markdown -> HTML) -->
+            <div class="page-content fs-5">
+                {{ content_html | safe }}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

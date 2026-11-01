@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+
+{% block title %}Состав парламента{% endblock %}
+
+{% block content %}
+<div class="row mb-5">
+    <div class="col text-center">
+        <h1 class="fw-bold mb-2" style="color: var(--primary-navy); font-size: 2.5rem;">Состав парламента</h1>
+        <p class="text-muted lead">Люди, которые делают школьную жизнь интереснее</p>
+    </div>
+</div>
+
+<!-- 1. БЛОК ДЛЯ ПРЕЗИДЕНТА (order_priority == 1) -->
+<div class="row justify-content-center mb-5">
+    {% for member in members %}
+        {% if member.order_priority == 1 %}
+        <div class="col-md-9 col-lg-8">
+            <div class="custom-card p-4 p-md-5 shadow-lg" style="border-top: 5px solid var(--accent-gold);">
+                
+                <!-- Горизонтальное расположение -->
+                <div class="row align-items-center">
+                    
+                    <!-- Левая часть: Фото -->
+                    <div class="col-md-4 text-center mb-4 mb-md-0">
+                        {% if member.photo %}
+                            <img src="/static/uploads/members/{{ member.photo }}" alt="{{ member.first_name }}" 
+                                 class="rounded-circle shadow" 
+                                 style="width: 180px; height: 180px; object-fit: cover; border: 4px solid #eef1f6;">
+                        {% else %}
+                            <div class="rounded-circle mx-auto d-flex align-items-center justify-content-center shadow" 
+                                 style="width: 180px; height: 180px; background-color: var(--primary-navy); color: var(--accent-gold); font-size: 4rem; font-weight: bold; border: 4px solid #eef1f6;">
+                                {{ member.first_name[0] }}{{ member.last_name[0] }}
+                            </div>
+                        {% endif %}
+                    </div>
+
+                    <!-- Правая часть: Текст -->
+                    <div class="col-md-8 text-center text-md-start">
+                        <h2 class="fw-bold mb-2" style="color: var(--primary-navy); font-size: 2.2rem;">
+                            {{ member.last_name }} <br class="d-none d-md-block"> {{ member.first_name }}
+                        </h2>
+                        <div class="badge mb-3" style="background-color: var(--accent-gold); color: var(--primary-navy); font-size: 1.1rem; padding: 8px 16px;">
+                            {{ member.role }}
+                        </div>
+                        <p class="text-muted fs-5 mb-0"><strong>Класс:</strong> {{ member.class_name or "Не указан" }}</p>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    {% endfor %}
+</div>
+
+<!-- 2. СЕТКА ДЛЯ ОСТАЛЬНЫХ (order_priority != 1) -->
+<div class="row g-4 justify-content-center">
+    {% for member in members %}
+        {% if member.order_priority != 1 %}
+        <div class="col-md-6 col-lg-4">
+            <div class="custom-card h-100 p-4 text-center d-flex flex-column align-items-center">
+                
+                <!-- Аватарка -->
+                {% if member.photo %}
+                    <img src="/static/uploads/members/{{ member.photo }}" alt="{{ member.first_name }}" 
+                         class="rounded-circle mb-3 shadow-sm" 
+                         style="width: 110px; height: 110px; object-fit: cover; border: 3px solid #eef1f6;">
+                {% else %}
+                    <div class="rounded-circle mb-3 d-flex align-items-center justify-content-center shadow-sm" 
+                         style="width: 110px; height: 110px; background-color: var(--primary-navy); color: var(--accent-gold); font-size: 2.5rem; font-weight: bold; border: 3px solid #eef1f6;">
+                        {{ member.first_name[0] }}{{ member.last_name[0] }}
+                    </div>
+                {% endif %}
+
+                <!-- ФИО -->
+                <h4 class="fw-bold mb-1" style="color: var(--primary-navy);">
+                    {{ member.last_name }} {{ member.first_name }}
+                </h4>
+                
+                <!-- Роль -->
+                <div class="badge mb-3" style="background-color: var(--accent-gold); color: var(--primary-navy); font-size: 0.9rem; padding: 6px 12px;">
+                    {{ member.role }}
+                </div>
+                
+                <!-- Класс и Комитет -->
+                <div class="mt-auto text-muted small">
+                    <p class="mb-1"><strong>Класс:</strong> {{ member.class_name or "Не указан" }}</p>
+                    
+                    {% if member.committee_id %}
+                        {% for com in committees %}
+                            {% if com.id == member.committee_id %}
+                                <p class="mb-0"><strong>Комитет:</strong> {{ com.name }}</p>
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                </div>
+                
+            </div>
+        </div>
+        {% endif %}
+    {% endfor %}
+</div>
+{% endblock %}

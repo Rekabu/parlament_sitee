@@ -1,0 +1,257 @@
+/* Импорт современного шрифта */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+    /* Цветовая палитра */
+    --primary-navy: #1b263b; /* Глубокий синий */
+    --accent-gold: #e0a96d;  /* Золотой/янтарный акцент */
+    --bg-light: #f8f9fa;     /* Светло-серый фон */
+    --text-dark: #212529;
+    --text-muted: #6c757d;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #eef1f6; 
+    color: var(--text-dark);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main {
+    flex: 1; /* Прижимаем футер к низу */
+}
+
+/* Кастомный Навбар */
+.custom-navbar {
+    background-color: var(--primary-navy) !important;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.custom-navbar .navbar-brand {
+    font-weight: 700;
+    color: white !important;
+    letter-spacing: 0.5px;
+}
+
+.custom-navbar .nav-link {
+    color: rgba(255, 255, 255, 0.85) !important;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.custom-navbar .nav-link:hover {
+    color: var(--accent-gold) !important;
+}
+
+/* Красивые карточки */
+.custom-card {
+    background: white;
+    border: none;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.04);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.custom-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(0,0,0,0.08);
+}
+
+/* Кнопки */
+.btn-accent {
+    background-color: var(--accent-gold);
+    color: var(--primary-navy);
+    font-weight: 600;
+    border: none;
+    padding: 0.6rem 1.5rem;
+    border-radius: 8px;
+    transition: background-color 0.2s;
+}
+
+.btn-accent:hover {
+    background-color: #d4985c;
+    color: var(--primary-navy);
+}
+
+.btn-outline-custom {
+    border: 2px solid var(--primary-navy);
+    color: var(--primary-navy);
+    font-weight: 600;
+    border-radius: 8px;
+}
+
+.btn-outline-custom:hover {
+    background-color: var(--primary-navy);
+    color: white;
+}
+
+/* Футер */
+footer {
+    background-color: var(--primary-navy);
+    color: rgba(255, 255, 255, 0.6);
+    padding: 2rem 0;
+    margin-top: auto;
+}
+
+footer a {
+    color: var(--accent-gold);
+    text-decoration: none;
+}
+/* =========================================
+   ПЛАВНЫЕ ПЕРЕХОДЫ МЕЖДУ СТРАНИЦАМИ
+   ========================================= */
+
+/* 1. Плавное появление страницы при загрузке */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+body {
+    animation: fadeIn 0.4s ease-out forwards;
+}
+
+/* 2. Современный API View Transitions */
+@view-transition {
+    navigation: auto;
+}
+
+::view-transition-old(root) {
+    animation: 0.3s ease-out both fade-out;
+}
+
+::view-transition-new(root) {
+    animation: 0.3s ease-in both fade-in;
+}
+
+@keyframes fade-out {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+
+@keyframes fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* 3. Чтобы навбар не "дёргался" при переходе, зафиксируем его */
+.custom-navbar {
+    view-transition-name: navbar;
+}
+
+::view-transition-old(navbar),
+::view-transition-new(navbar) {
+    animation: none;
+    mix-blend-mode: normal;
+}
+/* =========================================
+   ФОН ПРОФИЛЯ (РАЗБРОСАННЫЕ ШКОЛЬНЫЕ ПРЕДМЕТЫ)
+   ========================================= */
+
+.profile-background {
+    /* Цвет фона (светло-голубой) */
+    background-color: #eef1f6;
+    
+    /* Создаем паттерн из SVG-иконок (книга, тетрадь, карандаш) */
+    background-image: url("data:image/svg+xml,%3Csvg width='120' height='120' viewBox='0 0 120 120' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%231b263b' fill-opacity='0.05'%3E%3Cpath d='M20 30 h15 v30 h-15 z M25 25 l10 5 l-10 5 z'/%3E%3Cpath d='M80 80 h10 v-15 h-10 z M85 85 l5 -10 l-5 -10 z'/%3E%3Cpath d='M60 20 l10 10 l-10 10 z'/%3E%3Ccircle cx='30' cy='90' r='4'/%3E%3Ccircle cx='90' cy='40' r='3'/%3E%3C/g%3E%3C/svg%3E");
+    
+    /* Размер паттерна */
+    background-size: 200px 200px;
+    
+    /* Отступы и оформление */
+    padding: 5rem 2rem;
+    border-radius: 16px;
+    border: 1px solid rgba(27, 38, 59, 0.15);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+/* Убираем старую красную линию (если она была) */
+.profile-background::before {
+    content: none;
+    display: none;
+}
+
+/* Карточка профиля должна быть четкой и белой */
+.profile-background > div > .row > .col-md-8 > .custom-card {
+    background-color: #ffffff;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+}
+/* =========================================
+   СТИЛИ ДЛЯ ТЕКСТОВЫХ СТРАНИЦ (Markdown)
+   ========================================= */
+
+.page-content {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #4a5568; /* Мягкий серо-синий цвет для текста */
+}
+
+/* Стили для заголовков внутри текста */
+.page-content h2 {
+    color: var(--primary-navy);
+    font-weight: 700;
+    font-size: 1.6rem;
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid rgba(224, 169, 109, 0.3); /* Тонкая золотая линия под заголовком */
+    padding-bottom: 0.5rem;
+}
+
+.page-content h3 {
+    color: var(--primary-navy);
+    font-weight: 600;
+    font-size: 1.3rem;
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+}
+
+/* Стили для абзацев */
+.page-content p {
+    margin-bottom: 1.25rem;
+}
+
+/* Красивые списки с золотыми маркерами */
+.page-content ul {
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 1.5rem;
+}
+
+.page-content ul li {
+    position: relative;
+    padding-left: 1.75rem;
+    margin-bottom: 0.75rem;
+}
+
+.page-content ul li::before {
+    content: "•";
+    color: var(--accent-gold);
+    font-size: 1.5rem;
+    position: absolute;
+    left: 0;
+    top: -0.25rem;
+
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+/* Стили для выделения текста (жирный) */
+.page-content strong {
+    color: var(--primary-navy);
+    font-weight: 600;
+}
+
+/* Карточка для текста */
+.article-card {
+    background: white;
+    border-radius: 16px;
+    
+    box-shadow: 
+        0 10px 30px rgba(0, 0, 0, 0.1), /* Ближняя тень (контур) */
+        0 30px 60px rgba(0, 0, 0, 0.07); /* Дальняя тень (объем) */ 
+                
+    padding: 3rem 4rem;
+    border: none; 
+}
