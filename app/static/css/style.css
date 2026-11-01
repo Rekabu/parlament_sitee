@@ -255,3 +255,16 @@ body {
     padding: 3rem 4rem;
     border: none; 
 }
+/* Делаем кнопку-бургер видимой на тёмном фоне */
+.custom-navbar .navbar-toggler {
+    border-color: rgba(224, 169, 109, 0.5); /* Золотая рамка */
+}
+
+.custom-navbar .navbar-toggler-icon {
+    /* Меняем стандартную белую иконку на золотую */
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='%23e0a96d' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+.custom-navbar .navbar-toggler:focus {
+    box-shadow: none; /* Убираем стандартную синюю обводку при клике */
+}
