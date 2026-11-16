@@ -2,7 +2,7 @@ from sqladmin import Admin, ModelView
 from sqladmin.authentication import AuthenticationBackend
 from starlette.requests import Request
 from app.db.session import engine
-from app.models import User, Page, News, Member, Committee, Feedback, Idea, IdeaVote
+from app.models import User, Page, News, Member, Committee, Feedback, Idea, IdeaVote, Event
 from app.core.config import settings
 from sqlmodel import Session, select
 
@@ -101,6 +101,23 @@ class IdeaAdmin(ModelView, model=Idea):
     name_plural = "Идеи"
     icon = "fa-solid fa-lightbulb"
 
+
+class EventAdmin(ModelView, model=Event):
+    column_list = [Event.title, Event.starts_at, Event.ends_at, Event.location, Event.all_day]
+    column_searchable_list = [Event.title, Event.location]
+    form_columns = [
+        Event.title,
+        Event.description,
+        Event.location,
+        Event.starts_at,
+        Event.ends_at,
+        Event.all_day,
+    ]
+    name = "Мероприятие"
+    name_plural = "Мероприятия"
+    icon = "fa-solid fa-calendar-days"
+
+
 def setup_admin(app):
     authentication_backend = AdminAuth(secret_key=settings.secret_key)
     
@@ -118,4 +135,5 @@ def setup_admin(app):
     admin.add_view(MemberAdmin)    
     admin.add_view(FeedbackAdmin)
     admin.add_view(IdeaAdmin)
+    admin.add_view(EventAdmin)
     

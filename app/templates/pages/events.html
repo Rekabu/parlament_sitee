@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block title %}Календарь мероприятий{% endblock %}
+{% block meta_description %}Календарь мероприятий школьного парламента Зыковской СОШ.{% endblock %}
+
+{% block head %}
+    {{ super() }}
+    <link rel="stylesheet" href="/static/css/events-calendar.css">
+{% endblock %}
+
+{% block content %}
+<section class="events-page" aria-labelledby="events-title">
+    <header class="events-page-heading">
+        <div>
+            <p class="events-eyebrow">Жизнь школьного парламента</p>
+            <h1 id="events-title">Календарь мероприятий</h1>
+            <p class="events-intro">Важные даты, встречи и события нашей школьной жизни.</p>
+        </div>
+    </header>
+
+    <div class="events-calendar custom-card">
+        <div class="calendar-toolbar">
+            <div class="calendar-toolbar-month">
+                <h2 id="calendar-month" aria-live="polite"></h2>
+                <div class="calendar-navigation" aria-label="Навигация по календарю">
+                    <button class="calendar-icon-button" id="calendar-previous" type="button" aria-label="Предыдущий месяц">‹</button>
+                    <button class="calendar-icon-button" id="calendar-next" type="button" aria-label="Следующий месяц">›</button>
+                    <button class="calendar-today-button" id="calendar-today" type="button">Сегодня</button>
+                </div>
+            </div>
+            <label class="calendar-search">
+                <span aria-hidden="true">⌕</span>
+                <input id="calendar-search-input" type="search" placeholder="Поиск мероприятий" aria-label="Поиск мероприятий">
+            </label>
+        </div>
+
+        <div class="calendar-layout">
+            <div class="calendar-month-view">
+                <div class="calendar-weekdays" aria-hidden="true">
+                    <span>пн</span><span>вт</span><span>ср</span><span>чт</span><span>пт</span><span>сб</span><span>вс</span>
+                </div>
+                <div class="calendar-grid" id="calendar-grid" role="grid" aria-label="Календарь мероприятий"></div>
+            </div>
+            <aside class="calendar-agenda" aria-labelledby="agenda-title">
+                <div class="agenda-heading">
+                    <span class="agenda-date" id="agenda-date"></span>
+                    <h3 id="agenda-title">Мероприятия</h3>
+                </div>
+                <div id="agenda-events" class="agenda-events" aria-live="polite"></div>
+            </aside>
+        </div>
+        <p id="calendar-error" class="calendar-error" role="alert" hidden>Не удалось загрузить мероприятия. Попробуйте обновить страницу.</p>
+    </div>
+</section>
+<script src="/static/js/events-calendar.js" defer></script>
+{% endblock %}

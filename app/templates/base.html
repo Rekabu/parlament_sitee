@@ -20,10 +20,11 @@
     
     <!-- Наш кастомный CSS -->
     <link rel="stylesheet" href="/static/css/style.css">
+    {% block head %}{% endblock %}
 </head>
 <body>
     <!-- Навигация -->
-    <nav class="navbar navbar-expand-lg custom-navbar">
+    <nav class="navbar navbar-expand-xxl custom-navbar">
         <div class="container">
             <a class="navbar-brand d-flex align-items-center" href="/">
                 <img src="/static/img/logo.png" 
@@ -40,14 +41,15 @@
             
             <div class="collapse navbar-collapse" id="navbarNav">
                 <div class="navbar-nav ms-auto align-items-center">
-                    <a class="nav-link px-3" href="/">Главная</a>
-                    <a class="nav-link px-3" href="/about">О парламенте</a>
-                    <a class="nav-link px-3" href="/news">Новости</a>
-                    <a class="nav-link px-3" href="/members">Состав</a>
-                    <a class="nav-link px-3" href="/feedback">Ящик идей</a>
+                    <a class="nav-link" href="/" {% if request.url.path == "/" %}aria-current="page"{% endif %}>Главная</a>
+                    <a class="nav-link" href="/about" {% if request.url.path == "/about" %}aria-current="page"{% endif %}>О парламенте</a>
+                    <a class="nav-link" href="/news" {% if request.url.path == "/news" %}aria-current="page"{% endif %}>Новости</a>
+                    <a class="nav-link" href="/events" {% if request.url.path == "/events" %}aria-current="page"{% endif %}>Календарь мероприятий</a>
+                    <a class="nav-link" href="/members" {% if request.url.path == "/members" %}aria-current="page"{% endif %}>Состав</a>
+                    <a class="nav-link" href="/feedback" {% if request.url.path == "/feedback" %}aria-current="page"{% endif %}>Ящик идей</a>
 
                     {% if current_user %}
-                        <a class="nav-link px-3 fw-bold" href="/profile">
+                        <a class="nav-link fw-bold" href="/profile">
                             {% if current_user.last_name %}{{ current_user.last_name }} {% endif %}{{ current_user.first_name or current_user.username }}
                         </a>
                         <a class="btn btn-sm btn-outline-light ms-2" href="/auth/logout">Выйти</a>

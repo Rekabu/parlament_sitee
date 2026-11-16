@@ -26,23 +26,74 @@ main {
 /* Кастомный Навбар */
 .custom-navbar {
     background-color: var(--primary-navy) !important;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    border-top: 3px solid var(--accent-gold);
+    box-shadow: 0 8px 24px rgba(16, 25, 42, 0.16);
 }
 
 .custom-navbar .navbar-brand {
     font-weight: 700;
     color: white !important;
     letter-spacing: 0.5px;
+    white-space: nowrap;
+}
+
+.custom-navbar .navbar-brand img {
+    flex: 0 0 auto;
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.12);
+}
+
+.custom-navbar .navbar-nav {
+    gap: 0.15rem;
 }
 
 .custom-navbar .nav-link {
+    position: relative;
+    padding: 0.65rem 0.55rem !important;
+    border-radius: 7px;
     color: rgba(255, 255, 255, 0.85) !important;
     font-weight: 500;
-    transition: color 0.2s;
+    white-space: nowrap;
+    transition: color 0.2s, background-color 0.2s;
+}
+
+.custom-navbar .nav-link:hover,
+.custom-navbar .nav-link[aria-current="page"] {
+    color: var(--accent-gold) !important;
 }
 
 .custom-navbar .nav-link:hover {
-    color: var(--accent-gold) !important;
+    background-color: rgba(255, 255, 255, 0.07);
+}
+
+.custom-navbar .nav-link[aria-current="page"]::after {
+    position: absolute;
+    right: 0.55rem;
+    bottom: 0.25rem;
+    left: 0.55rem;
+    height: 2px;
+    border-radius: 2px;
+    background-color: var(--accent-gold);
+    content: "";
+}
+
+.custom-navbar .btn {
+    white-space: nowrap;
+}
+
+@media (max-width: 1399.98px) {
+    .custom-navbar .navbar-collapse {
+        padding: 0.5rem 0 0.75rem;
+    }
+
+    .custom-navbar .navbar-nav {
+        align-items: stretch !important;
+        gap: 0.15rem;
+    }
+
+    .custom-navbar .navbar-nav .btn {
+        align-self: flex-start;
+        margin: 0.35rem 0 0 0.55rem !important;
+    }
 }
 
 /* Красивые карточки */
@@ -50,13 +101,13 @@ main {
     background: white;
     border: none;
     border-radius: 16px;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.04);
+    box-shadow: 0 14px 36px rgba(27, 38, 59, 0.14), 0 4px 12px rgba(27, 38, 59, 0.08);
     transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .custom-card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 12px 32px rgba(0,0,0,0.08);
+    box-shadow: 0 20px 46px rgba(27, 38, 59, 0.2), 0 8px 18px rgba(27, 38, 59, 0.08);
 }
 
 /* Кнопки */
@@ -164,7 +215,7 @@ body {
     padding: 5rem 2rem;
     border-radius: 16px;
     border: 1px solid rgba(27, 38, 59, 0.15);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 16px 38px rgba(27, 38, 59, 0.2);
 }
 
 /* Убираем старую красную линию (если она была) */
@@ -176,7 +227,7 @@ body {
 /* Карточка профиля должна быть четкой и белой */
 .profile-background > div > .row > .col-md-8 > .custom-card {
     background-color: #ffffff;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 18px 40px rgba(27, 38, 59, 0.16), 0 5px 14px rgba(27, 38, 59, 0.08);
 }
 /* =========================================
    СТИЛИ ДЛЯ ТЕКСТОВЫХ СТРАНИЦ (Markdown)
@@ -249,8 +300,8 @@ body {
     border-radius: 16px;
     
     box-shadow: 
-        0 10px 30px rgba(0, 0, 0, 0.1), /* Ближняя тень (контур) */
-        0 30px 60px rgba(0, 0, 0, 0.07); /* Дальняя тень (объем) */ 
+        0 14px 36px rgba(27, 38, 59, 0.16), /* Ближняя тень (контур) */
+        0 30px 60px rgba(27, 38, 59, 0.1); /* Дальняя тень (объем) */
                 
     padding: 3rem 4rem;
     border: none; 

@@ -94,6 +94,7 @@ from app.web import about as about_router
 from app.web import members as members_router
 from app.web import feedback as feedback_router
 from app.web import news as news_router
+from app.web import events as events_router
 
 app.include_router(auth_router.router)
 app.include_router(profile_router.router)
@@ -101,3 +102,4 @@ app.include_router(about_router.router)
 app.include_router(members_router.router)
 app.include_router(feedback_router.router)
 app.include_router(news_router.router)
+app.include_router(events_router.router)
