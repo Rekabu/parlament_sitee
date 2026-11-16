@@ -1,0 +1,21 @@
+{% extends "sqladmin_original/layout.html" %}
+
+{% block body %}
+{{ super().replace('Toggle navigation', 'Открыть меню') | safe }}
+{% endblock %}
+
+{% block topbar %}
+{{ super() }}
+<header class="navbar navbar-expand-md d-print-none admin-topbar">
+  <div class="container-fluid">
+    <div class="admin-topbar-caption">
+      <span class="admin-topbar-mark" aria-hidden="true"></span>
+      <span>Управление сайтом</span>
+    </div>
+    <a class="btn admin-site-button" href="/">
+      <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
+      <span>Вернуться на сайт</span>
+    </a>
+  </div>
+</header>
+{% endblock %}

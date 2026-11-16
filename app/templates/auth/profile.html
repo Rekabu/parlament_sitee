@@ -16,7 +16,7 @@
                 {{ (user.first_name or user.username)[:1] | upper }}{% if user.last_name %}{{ user.last_name[:1] | upper }}{% endif %}
             </div>
             <div class="profile-hero-info">
-                <p class="profile-hero-label">Профиль участника</p>
+                <p class="profile-hero-label">Профиль ученика</p>
                 <h2>{% if user.last_name %}{{ user.last_name }} {% endif %}{{ user.first_name or user.username }}</h2>
                 <p class="profile-hero-login">@{{ user.username }}</p>
                 <div class="profile-hero-badges">
@@ -72,7 +72,7 @@
             <aside class="profile-sidebar">
                 <section class="profile-class-card custom-card" aria-labelledby="profile-class-title">
                     <span class="profile-side-icon" aria-hidden="true">К</span>
-                    <p class="profile-side-eyebrow">Школьный парламент</p>
+                    <p class="profile-side-eyebrow">Учебная информация</p>
                     <h2 id="profile-class-title">Мой класс</h2>
                     <p class="profile-class-value">{{ user.class_name or "Не указан" }}</p>
                     <p class="profile-side-note">Класс, указанный при регистрации</p>

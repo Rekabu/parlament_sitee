@@ -1,0 +1,41 @@
+{% extends "sqladmin/layout.html" %}
+
+{% block content %}
+<section class="admin-dashboard">
+  <div class="admin-dashboard-hero">
+    <div>
+      <p class="admin-dashboard-eyebrow">Рабочее пространство</p>
+      <h2>Добро пожаловать в панель управления</h2>
+      <p>Выберите раздел, чтобы обновить содержимое сайта.</p>
+    </div>
+    <div class="admin-dashboard-hero-icon" aria-hidden="true">
+      <i class="fa-solid fa-layer-group"></i>
+    </div>
+  </div>
+
+  <div class="admin-dashboard-section-heading">
+    <div>
+      <p class="admin-dashboard-eyebrow">Быстрый доступ</p>
+      <h3>Разделы управления</h3>
+    </div>
+    <span>{{ admin._views | length }} разделов</span>
+  </div>
+
+  <div class="admin-dashboard-grid">
+    {% for model_view in admin._views %}
+    {% if model_view.is_visible(request) and model_view.is_accessible(request) %}
+    <a class="admin-dashboard-card" href="{{ request.url_for('admin:list', identity=model_view.identity) }}">
+      <span class="admin-dashboard-card-icon" aria-hidden="true">
+        {% if model_view.icon %}<i class="{{ model_view.icon }}"></i>{% else %}<i class="fa-solid fa-folder"></i>{% endif %}
+      </span>
+      <span class="admin-dashboard-card-copy">
+        <strong>{{ model_view.name_plural }}</strong>
+        <small>Открыть раздел управления</small>
+      </span>
+      <span class="admin-dashboard-card-arrow" aria-hidden="true">→</span>
+    </a>
+    {% endif %}
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

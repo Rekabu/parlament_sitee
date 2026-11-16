@@ -49,7 +49,7 @@
                     <a class="nav-link" href="/feedback" {% if request.url.path == "/feedback" %}aria-current="page"{% endif %}>Ящик идей</a>
 
                     {% if current_user %}
-                        <a class="nav-link fw-bold" href="/profile">
+                        <a class="nav-link fw-bold" href="/profile" {% if request.url.path == "/profile" %}aria-current="page"{% endif %}>
                             {% if current_user.last_name %}{{ current_user.last_name }} {% endif %}{{ current_user.first_name or current_user.username }}
                         </a>
                         <a class="btn btn-sm btn-outline-light ms-2" href="/auth/logout">Выйти</a>
@@ -70,7 +70,7 @@
     <!-- Футер -->
     <footer class="text-center text-muted py-4" style="background-color: var(--primary-navy); color: rgba(255,255,255,0.6) !important; margin-top: auto;">
         <div class="container">
-            <p class="mb-1">&copy; 2026 Зыковская СОШ им. Героя РФ К.А. Веселова</p>
+            <p class="mb-1">&copy; 2026 МБОУ Зыковская СОШ им. Героя РФ К.А. Веселова</p>
             <small>Разработано в рамках индивидуального проекта</small>
         </div>
     </footer>

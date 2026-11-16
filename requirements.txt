@@ -8,6 +8,6 @@ python-multipart>=0.0.20
 pydantic-settings>=2.0.0
 itsdangerous>=2.2.0
 markdown>=3.6
-sqladmin>=0.16.0
+sqladmin[i18n]>=0.16.0
 Pillow>=10.0.0
 psycopg2-binary>=2.9.9
