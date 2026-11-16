@@ -103,3 +103,9 @@ app.include_router(members_router.router)
 app.include_router(feedback_router.router)
 app.include_router(news_router.router)
 app.include_router(events_router.router)
+
+from fastapi.responses import FileResponse
+
+@app.get("/sitemap.xml", include_in_schema=False)
+async def sitemap():
+    return FileResponse("app/static/sitemap.xml", media_type="application/xml")
