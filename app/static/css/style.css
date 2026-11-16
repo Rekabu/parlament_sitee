@@ -202,32 +202,360 @@ body {
    ========================================= */
 
 .profile-background {
-    /* Цвет фона (светло-голубой) */
     background-color: #eef1f6;
-    
-    /* Создаем паттерн из SVG-иконок (книга, тетрадь, карандаш) */
     background-image: url("data:image/svg+xml,%3Csvg width='120' height='120' viewBox='0 0 120 120' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%231b263b' fill-opacity='0.05'%3E%3Cpath d='M20 30 h15 v30 h-15 z M25 25 l10 5 l-10 5 z'/%3E%3Cpath d='M80 80 h10 v-15 h-10 z M85 85 l5 -10 l-5 -10 z'/%3E%3Cpath d='M60 20 l10 10 l-10 10 z'/%3E%3Ccircle cx='30' cy='90' r='4'/%3E%3Ccircle cx='90' cy='40' r='3'/%3E%3C/g%3E%3C/svg%3E");
-    
-    /* Размер паттерна */
     background-size: 200px 200px;
-    
-    /* Отступы и оформление */
-    padding: 5rem 2rem;
+    padding: clamp(2rem, 5vw, 4rem) clamp(1rem, 3vw, 2rem);
     border-radius: 16px;
     border: 1px solid rgba(27, 38, 59, 0.15);
     box-shadow: 0 16px 38px rgba(27, 38, 59, 0.2);
 }
 
-/* Убираем старую красную линию (если она была) */
 .profile-background::before {
     content: none;
     display: none;
 }
 
-/* Карточка профиля должна быть четкой и белой */
-.profile-background > div > .row > .col-md-8 > .custom-card {
-    background-color: #ffffff;
-    box-shadow: 0 18px 40px rgba(27, 38, 59, 0.16), 0 5px 14px rgba(27, 38, 59, 0.08);
+.profile-page {
+    width: min(100%, 1020px);
+    margin: 0 auto;
+}
+
+.profile-page-heading {
+    margin-bottom: 1.5rem;
+}
+
+.profile-eyebrow,
+.profile-side-eyebrow {
+    margin: 0 0 0.35rem;
+    color: #94704e;
+    font-size: 0.74rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.profile-page-heading h1 {
+    margin: 0;
+    color: var(--primary-navy);
+    font-size: clamp(1.8rem, 4vw, 2.4rem);
+    font-weight: 700;
+}
+
+.profile-page-heading > p:last-child {
+    margin: 0.45rem 0 0;
+    color: var(--text-muted);
+}
+
+.profile-hero {
+    position: relative;
+    display: flex;
+    min-height: 190px;
+    align-items: center;
+    gap: 1.5rem;
+    overflow: hidden;
+    padding: clamp(1.5rem, 4vw, 2.5rem);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: linear-gradient(115deg, #1b263b 0%, #263a59 100%);
+    color: white;
+}
+
+.profile-avatar {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    width: 100px;
+    height: 100px;
+    flex: 0 0 auto;
+    place-items: center;
+    border: 4px solid rgba(255, 255, 255, 0.78);
+    border-radius: 50%;
+    background: linear-gradient(145deg, #f1c48f, var(--accent-gold));
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.22);
+    color: var(--primary-navy);
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.profile-hero-info {
+    position: relative;
+    z-index: 1;
+    min-width: 0;
+}
+
+.profile-hero-label {
+    margin: 0 0 0.3rem;
+    color: #f0c08e;
+    font-size: 0.73rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+.profile-hero-info h2 {
+    margin: 0;
+    color: white;
+    font-size: clamp(1.4rem, 3vw, 2rem);
+    font-weight: 700;
+    overflow-wrap: anywhere;
+}
+
+.profile-hero-login {
+    margin: 0.25rem 0 0;
+    color: rgba(255, 255, 255, 0.66);
+    font-size: 0.92rem;
+}
+
+.profile-hero-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 0.85rem;
+}
+
+.profile-role-badge,
+.profile-class-badge {
+    display: inline-flex;
+    min-height: 28px;
+    align-items: center;
+    padding: 0.25rem 0.7rem;
+    border: 1px solid rgba(255, 255, 255, 0.19);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.profile-role-badge.role-student {
+    border-color: rgba(224, 169, 109, 0.4);
+    background: rgba(224, 169, 109, 0.16);
+    color: #f4cfaa;
+}
+
+.profile-role-badge.role-member {
+    border-color: rgba(111, 178, 203, 0.4);
+    background: rgba(111, 178, 203, 0.16);
+    color: #b7e0ef;
+}
+
+.profile-role-badge.role-chair {
+    border-color: rgba(243, 204, 123, 0.45);
+    background: rgba(243, 204, 123, 0.17);
+    color: #f5d992;
+}
+
+.profile-role-badge.role-admin {
+    border-color: rgba(231, 125, 115, 0.45);
+    background: rgba(231, 125, 115, 0.17);
+    color: #ffb8af;
+}
+
+.profile-hero-decoration {
+    position: absolute;
+    top: -110px;
+    right: -25px;
+    width: 300px;
+    height: 300px;
+    border: 1px solid rgba(224, 169, 109, 0.2);
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(224, 169, 109, 0.14), transparent 68%);
+}
+
+.profile-hero-decoration::after {
+    position: absolute;
+    inset: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    border-radius: 50%;
+    content: "";
+}
+
+.profile-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.5fr) minmax(245px, 0.8fr);
+    gap: 1.1rem;
+    margin-top: 1.1rem;
+}
+
+.profile-info-card,
+.profile-class-card,
+.profile-admin-card {
+    padding: clamp(1.25rem, 3vw, 1.75rem);
+}
+
+.profile-section-heading {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin-bottom: 0.5rem;
+}
+
+.profile-section-mark {
+    display: grid;
+    width: 38px;
+    height: 38px;
+    flex: 0 0 auto;
+    place-items: center;
+    border-radius: 12px;
+    background: rgba(224, 169, 109, 0.17);
+    color: #946d46;
+    font-size: 0.74rem;
+    font-weight: 700;
+}
+
+.profile-section-heading h2 {
+    margin: 0;
+    color: var(--primary-navy);
+    font-size: 1.08rem;
+    font-weight: 700;
+}
+
+.profile-section-heading p {
+    margin: 0.15rem 0 0;
+    color: var(--text-muted);
+    font-size: 0.78rem;
+}
+
+.profile-details-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.25rem 1rem;
+    margin: 1.1rem 0 0;
+}
+
+.profile-detail {
+    min-width: 0;
+    padding: 0.9rem 0;
+    border-top: 1px solid rgba(27, 38, 59, 0.09);
+}
+
+.profile-detail dt {
+    margin-bottom: 0.3rem;
+    color: #7c8794;
+    font-size: 0.76rem;
+    font-weight: 500;
+}
+
+.profile-detail dd {
+    margin: 0;
+    color: var(--primary-navy);
+    font-size: 0.96rem;
+    font-weight: 600;
+    overflow-wrap: anywhere;
+}
+
+.profile-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+}
+
+.profile-class-card {
+    min-height: 205px;
+    background: linear-gradient(145deg, #fff 0%, #fff8f0 100%);
+}
+
+.profile-side-icon {
+    display: grid;
+    width: 42px;
+    height: 42px;
+    margin-bottom: 1rem;
+    place-items: center;
+    border-radius: 13px;
+    background: rgba(224, 169, 109, 0.2);
+    color: #946d46;
+    font-size: 1.05rem;
+    font-weight: 700;
+}
+
+.profile-side-eyebrow {
+    margin-bottom: 0.35rem;
+    font-size: 0.68rem;
+}
+
+.profile-class-card h2,
+.profile-admin-card h2 {
+    margin: 0;
+    color: var(--primary-navy);
+    font-size: 1.05rem;
+    font-weight: 700;
+}
+
+.profile-class-value {
+    margin: 0.5rem 0 0;
+    color: var(--primary-navy);
+    font-size: 1.45rem;
+    font-weight: 700;
+}
+
+.profile-side-note {
+    margin: 0.35rem 0 0;
+    color: var(--text-muted);
+    font-size: 0.78rem;
+    line-height: 1.5;
+}
+
+.profile-admin-card {
+    border-top: 3px solid #c65a50;
+}
+
+.profile-admin-card .btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 1rem;
+}
+
+.profile-home-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    margin-top: 1.2rem;
+    color: var(--primary-navy);
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.profile-home-link:hover {
+    color: #94704e;
+}
+
+@media (max-width: 767.98px) {
+    .profile-grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .profile-class-card {
+        min-height: 0;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .profile-hero {
+        align-items: flex-start;
+        gap: 1rem;
+        padding: 1.25rem;
+    }
+
+    .profile-avatar {
+        width: 68px;
+        height: 68px;
+        font-size: 1.45rem;
+    }
+
+    .profile-hero-info h2 {
+        font-size: 1.3rem;
+    }
+
+    .profile-hero-decoration {
+        top: -160px;
+        right: -170px;
+    }
+
+    .profile-details-grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
 }
 /* =========================================
    СТИЛИ ДЛЯ ТЕКСТОВЫХ СТРАНИЦ (Markdown)

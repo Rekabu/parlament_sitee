@@ -3,70 +3,95 @@
 {% block title %}Профиль — {{ user.username }}{% endblock %}
 
 {% block content %}
-<!-- Блок с паттерном. Он занимает всю ширину контейнера из base.html -->
 <div class="profile-background">
-    
-    <!-- Внутренний контейнер центрирует карточку, но фон остается на всю ширину -->
-    <div class="container py-4">
-        <div class="row justify-content-center">
-            <div class="col-md-8 col-lg-6">
-                
-                <h1 class="mb-4">Профиль</h1>
+    <div class="profile-page">
+        <header class="profile-page-heading">
+            <p class="profile-eyebrow">Личный кабинет</p>
+            <h1>Мой профиль</h1>
+            <p>Здесь собрана информация о вашей учетной записи.</p>
+        </header>
 
-                <!-- Карточка с данными (bg-white чтобы перекрыть паттерн) -->
-                <div class="custom-card bg-white p-4">
-                    <dl class="row mb-0">
-                        <dt class="col-sm-4">Логин</dt>
-                        <dd class="col-sm-8">{{ user.username }}</dd>
-
-                        <dt class="col-sm-4">Фамилия</dt>
-                        <dd class="col-sm-8">{{ user.last_name or "Не указана" }}</dd>
-
-                        <dt class="col-sm-4">Имя</dt>
-                        <dd class="col-sm-8">{{ user.first_name or "Не указано" }}</dd>
-
-                        <dt class="col-sm-4">Класс</dt>
-                        <dd class="col-sm-8">{{ user.class_name or "не указан" }}</dd>
-
-                        <dt class="col-sm-4">Роль</dt>
-                        <dd class="col-sm-8">
-                            {% if user.role.value == "student" %}
-                                <span class="badge bg-secondary">Ученик</span>
-                            {% elif user.role.value == "member" %}
-                                <span class="badge bg-primary">Член парламента</span>
-                            {% elif user.role.value == "chair" %}
-                                <span class="badge bg-warning text-dark">Председатель</span>
-                            {% elif user.role.value == "admin" %}
-                                <span class="badge bg-danger">Администратор</span>
-                            {% endif %}
-                        </dd>
-                    </dl>
+        <section class="profile-hero custom-card" aria-label="Информация об участнике">
+            <div class="profile-avatar" aria-hidden="true">
+                {{ (user.first_name or user.username)[:1] | upper }}{% if user.last_name %}{{ user.last_name[:1] | upper }}{% endif %}
+            </div>
+            <div class="profile-hero-info">
+                <p class="profile-hero-label">Профиль участника</p>
+                <h2>{% if user.last_name %}{{ user.last_name }} {% endif %}{{ user.first_name or user.username }}</h2>
+                <p class="profile-hero-login">@{{ user.username }}</p>
+                <div class="profile-hero-badges">
+                    {% if user.role.value == "student" %}
+                        <span class="profile-role-badge role-student">Ученик</span>
+                    {% elif user.role.value == "member" %}
+                        <span class="profile-role-badge role-member">Член парламента</span>
+                    {% elif user.role.value == "chair" %}
+                        <span class="profile-role-badge role-chair">Председатель</span>
+                    {% elif user.role.value == "admin" %}
+                        <span class="profile-role-badge role-admin">Администратор</span>
+                    {% else %}
+                        <span class="profile-role-badge">Участник</span>
+                    {% endif %}
+                    {% if user.class_name %}
+                        <span class="profile-class-badge">{{ user.class_name }} класс</span>
+                    {% endif %}
                 </div>
+            </div>
+            <div class="profile-hero-decoration" aria-hidden="true"></div>
+        </section>
 
-                <a href="/" class="btn btn-outline-secondary mt-3 bg-white">← На главную</a>
-
-                <!-- Блок админки -->
-                {% if user.role.value == "admin" %}
-                <div class="row justify-content-center mt-4">
-                    <div class="col-12">
-                        <div class="custom-card bg-white p-4" style="border-left: 4px solid #dc3545;">
-                            <div class="d-flex justify-content-between align-items-center flex-wrap">
-                                <div>
-                                    <h5 class="fw-bold text-danger mb-1" style="font-size: 1.1rem;">Панель управления</h5>
-                                    <p class="text-muted small mb-0">Управление контентом и пользователями</p>
-                                </div>
-                                <a href="/admin" class="btn btn-danger btn-sm mt-2 mt-sm-0">
-                                    Перейти →
-                                </a>
-                            </div>
-                        </div>
+        <div class="profile-grid">
+            <section class="profile-info-card custom-card" aria-labelledby="profile-info-title">
+                <div class="profile-section-heading">
+                    <span class="profile-section-mark" aria-hidden="true">01</span>
+                    <div>
+                        <h2 id="profile-info-title">Данные профиля</h2>
+                        <p>Основная информация вашей учетной записи</p>
                     </div>
                 </div>
-                {% endif %}
 
-            </div>
+                <dl class="profile-details-grid">
+                    <div class="profile-detail">
+                        <dt>Имя</dt>
+                        <dd>{{ user.first_name or "Не указано" }}</dd>
+                    </div>
+                    <div class="profile-detail">
+                        <dt>Фамилия</dt>
+                        <dd>{{ user.last_name or "Не указана" }}</dd>
+                    </div>
+                    <div class="profile-detail">
+                        <dt>Логин</dt>
+                        <dd>{{ user.username }}</dd>
+                    </div>
+                    <div class="profile-detail">
+                        <dt>Класс</dt>
+                        <dd>{{ user.class_name or "Не указан" }}</dd>
+                    </div>
+                </dl>
+            </section>
+
+            <aside class="profile-sidebar">
+                <section class="profile-class-card custom-card" aria-labelledby="profile-class-title">
+                    <span class="profile-side-icon" aria-hidden="true">К</span>
+                    <p class="profile-side-eyebrow">Школьный парламент</p>
+                    <h2 id="profile-class-title">Мой класс</h2>
+                    <p class="profile-class-value">{{ user.class_name or "Не указан" }}</p>
+                    <p class="profile-side-note">Класс, указанный при регистрации</p>
+                </section>
+
+                {% if user.role.value == "admin" %}
+                <section class="profile-admin-card custom-card" aria-labelledby="profile-admin-title">
+                    <div>
+                        <p class="profile-side-eyebrow">Управление сайтом</p>
+                        <h2 id="profile-admin-title">Панель администратора</h2>
+                        <p class="profile-side-note">Новости, мероприятия и пользователи</p>
+                    </div>
+                    <a href="/admin" class="btn btn-accent w-100">Открыть панель <span aria-hidden="true">→</span></a>
+                </section>
+                {% endif %}
+            </aside>
         </div>
+
+        <a href="/" class="profile-home-link"><span aria-hidden="true">←</span> На главную</a>
     </div>
-    
 </div>
 {% endblock %}
